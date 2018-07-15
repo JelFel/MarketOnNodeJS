@@ -1,0 +1,37 @@
+{
+  "name": "marketonnodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    
+    "dev-client": "webpack-dev-server --port 3000",
+    "dev-server": "nodemon --exec babel-node -- server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JelFel/MarketOnNodeJS.git"
+  },
+  "author": "Viktor Litvinov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JelFel/MarketOnNodeJS/issues"
+  },
+  "homepage": "https://github.com/JelFel/MarketOnNodeJS#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "nodemon": "^1.18.2",
+    "webpack": "^4.16.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
+}
