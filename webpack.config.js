@@ -1,10 +1,14 @@
 const webpack = require('webpack');
 
 module.exports = {
-  entry: [
-    'react-hot-loader/patch',
-    './src/index.js'
-  ],
+  entry:{
+    index: './client/index.js'
+  },
+   output: {
+    path: __dirname + '/public',
+    filename: '[name].js',
+    library: '[name]'
+  },
   module: {
     rules: [
       {
@@ -17,26 +21,15 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx']
   },
-  output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
-    filename: 'bundle.js'
-  },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    historyApiFallback: true,
     hot: true,
-    inline: true,
-  
     host: 'localhost',
     port: 3000, 
     proxy: {
-      '^/api/*': {
-        target: 'http://localhost:8080/api/',
-        secure: false
-      }
+      '*':'http://localhost:8080'
     }
   }
 };

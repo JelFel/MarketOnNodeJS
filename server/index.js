@@ -1,12 +1,18 @@
 import express from 'express';
 import path from 'path';
+import mongodb from 'mongodb';
+
+const MongoClient = mongodb.MongoClient;
 const app = express();
-// Import routes
-//require('./_routes')(app);   // <-- or whatever you do to include your API endpoints and middleware
+
 app.set('port', 8080);
 
 app.get("/", function(req,res){
-    res.sendFile(path.join(__dirname,'../client/index.html'));
+    res.sendFile(path.join(__dirname,'../public/index.html'));
+});
+
+app.get("/app",function(req,res){
+    res.send("Страница /app");
 });
 
 app.listen(app.get('port'), function() {
