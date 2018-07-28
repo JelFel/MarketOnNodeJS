@@ -1,6 +1,9 @@
 const webpack = require('webpack');
+const merge = require('webpack-merge');
+const devserver = require('./webpack/devserver');
+const sass = require('./webpack/sass');
 
-module.exports = {
+const common = {
   entry:{
     index: './client/index.js'
   },
@@ -23,13 +26,20 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
-  ],
-  devServer: {
-    hot: true,
-    host: 'localhost',
-    port: 3000, 
-    proxy: {
-      '*':'http://localhost:8080'
-    }
-  }
+  ]
+};
+
+module.exports = function (env){
+ if(env === 'production'){
+   return merge([
+     common
+    ]);
+ }
+ if(env === 'development'){
+    return merge([
+      common,
+      devserver(),
+      sass()
+    ]);
+ }
 };
