@@ -1,4 +1,4 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import style from "./styles.scss";
-import Home from "./components/home/home.jsx";
+import style from "./style/styles.scss";
+import img from "./images/icon.svg";

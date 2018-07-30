@@ -1,7 +1,9 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devserver = require('./webpack/devserver');
-const sass = require('./webpack/sass');
+const sassdev = require('./webpack/sassdev');
+const sassprod = require('./webpack/sassprod');
 
 const common = {
   entry:{
@@ -9,7 +11,7 @@ const common = {
   },
    output: {
     path: __dirname + '/public',
-    filename: '[name].js',
+    filename: 'js/[name].js',
     library: '[name]'
   },
   module: {
@@ -18,6 +20,15 @@ const common = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
+      },
+      {
+        test: /\.(jpg|png|svg)$/, 
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          publicPath: 'client/',
+          outputPath: 'images/'
+        }
       }
     ]
   },
@@ -25,21 +36,25 @@ const common = {
     extensions: ['*', '.js', '.jsx']
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: './style/[name].css',
+    })
   ]
 };
 
 module.exports = function (env){
  if(env === 'production'){
    return merge([
-     common
+     common,
+     sassprod()
     ]);
  }
  if(env === 'development'){
     return merge([
       common,
       devserver(),
-      sass()
+      sassdev()
     ]);
  }
 };
